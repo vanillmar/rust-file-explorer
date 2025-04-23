@@ -103,18 +103,19 @@ A modern, sleek, and fully-featured file explorer built with Rust — inspired b
 ---
 
 ## Dependencies
-Dependency | Version | Description
-Rust | 1.86.0 | Systems programming language used for backend logic
-React | 18.3.1 | Frontend UI library for building dynamic interfaces
-Tauri | 1.5.x | Framework for building Rust-powered desktop apps with a web frontend
-Cargo | 1.86.0 | Rust package manager and build tool
-TypeScript | 5.6.2 | Typed superset of JavaScript for frontend
-Vite | 5.x.x | Lightning-fast frontend build tool
-Tailwind CSS | 3.x.x | Utility-first CSS framework for styling
-ESLint | 8.x.x | Linting tool for JavaScript/TypeScript
-Prettier | 3.x.x | Code formatter for consistent styling
-Jest | 29.x.x | Testing framework for JavaScript/TypeScript
-@tauri-apps/cli | 2.x.x | CLI tool for building and bundling Tauri apps
+| Dependency         | Version  | Description                                           |
+|---------------------|----------|-------------------------------------------------------|
+| Rust               | 1.86.0   | Systems programming language used for backend logic   |
+| React              | 18.3.1   | Frontend UI library for building dynamic interfaces   |
+| Tauri              | 1.5.x    | Framework for building Rust-powered desktop apps      |
+| Cargo              | 1.86.0   | Rust package manager and build tool                  |
+| TypeScript         | 5.6.2    | Typed superset of JavaScript for frontend            |
+| Vite               | 5.x.x    | Lightning-fast frontend build tool                   |
+| Tailwind CSS       | 3.x.x    | Utility-first CSS framework for styling              |
+| ESLint             | 8.x.x    | Linting tool for JavaScript/TypeScript               |
+| Prettier           | 3.x.x    | Code formatter for consistent styling                |
+| Jest               | 29.x.x   | Testing framework for JavaScript/TypeScript          |
+| @tauri-apps/cli    | 2.x.x    | CLI tool for building and bundling Tauri apps        |
 
 
 ## 📦 Installation
