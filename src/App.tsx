@@ -1,29 +1,26 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
+import { BottomBar } from "./components/custom/ButtomBar";
+import NavigationBar from "./components/custom/NavigationBar";
+import { Sidebar } from "./components/custom/Sidebar";
+import { Toolbar } from "./components/custom/Toolbar";
 
 function App() {
   return (
-    <main className="container">
-      <h1 className="text-3xl font-bold underline">File Explorer</h1>
-      <Router>
-          <nav className="p-4 bg-gray-800 text-white">
-            <Link className="mr-4" to="/">Home</Link>
-            <Link className="mr-4" to="/about">About</Link>
-          </nav>
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </Router>
-    </main>
+    <div className="flex flex-col h-screen">
+      <NavigationBar />
+      <Toolbar />
+      <div className="flex-1 p-1 overflow-auto">
+        <Sidebar />
+        {/* File explorer content goes here */}
+        <div className="grid grid-cols-4 gap-4">
+          {/* Example: file/folder tiles */}
+          <div className="border p-4 rounded bg-background shadow">Folder 1</div>
+          <div className="border p-4 rounded bg-background shadow">File 1.txt</div>
+          {/* Add more */}
+        </div>
+      </div>
+      <BottomBar />
+  </div>
   );
 }
 
