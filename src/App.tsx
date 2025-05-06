@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
+import { Button } from "@/components/ui/button"
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -29,6 +30,10 @@ function App() {
         <button type="submit">Greet</button>
       </form>
       <p>{greetMsg}</p>
+
+      <div className="flex flex-col items-center justify-center min-h-svh">
+        <Button>Click me</Button>
+      </div>
     </main>
   );
 }
