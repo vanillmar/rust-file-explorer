@@ -14,12 +14,12 @@ const mockItems: FileItem[] = [
 ]
 
 function App() {
-  const [viewMode, _] = useState<"grid" | "list" | "details">("grid")
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "details">("grid")
 
   return (
     <div className="flex flex-col h-screen">
       <NavigationBar />
-      <Toolbar />
+      <Toolbar onChangeView={setViewMode}/>
       <ContentContainer items={mockItems} viewMode={viewMode} />
       <BottomBar />
     </div>
