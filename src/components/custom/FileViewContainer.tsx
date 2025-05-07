@@ -100,6 +100,7 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
           <ContextMenuItem>
             <Copy className="w-4 h-4 mr-2" />
             Copy
+            <ContextMenuShortcut>ctlr+c</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem>
             <Pencil className="w-4 h-4 mr-2" />
@@ -108,6 +109,7 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
           <ContextMenuItem>
             <Trash2 className="w-4 h-4 mr-2" />
             Delete
+            <ContextMenuShortcut>del</ContextMenuShortcut>
           </ContextMenuItem>
         </ContextMenuGroup>
         <ContextMenuSeparator />
