@@ -3,7 +3,7 @@ import "./App.css"
 import { BottomBar } from "./components/custom/ButtomBar"
 import NavigationBar from "./components/custom/NavigationBar"
 import { Toolbar } from "./components/custom/Toolbar"
-import { FileItem } from "./components/custom/FileViewContainer"
+import { type FileItem } from "./components/custom/FileViewContainer"
 import ContentContainer from "./components/custom/ContentContainer"
 
 const mockItems: FileItem[] = [

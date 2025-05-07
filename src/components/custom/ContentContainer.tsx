@@ -1,6 +1,6 @@
-import { useState } from "react"
-import FileViewContainer, { FileViewContainerProps } from "./FileViewContainer"
-import { Sidebar } from "./Sidebar"
+import { useState } from "react";
+import FileViewContainer, { type FileViewContainerProps } from "./FileViewContainer";
+import { Sidebar } from "./Sidebar";
 
 export default function ContentContainer({ items, viewMode }: FileViewContainerProps) {
   const [sidebarWidth, _] = useState(240)
