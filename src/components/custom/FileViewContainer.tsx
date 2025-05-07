@@ -3,10 +3,14 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-  ContextMenuGroup
+  ContextMenuGroup,
+  ContextMenuShortcut,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuSub,
+  ContextMenuSeparator
 } from "@/components/ui/context-menu"
-import { ContextMenuSeparator } from "@radix-ui/react-context-menu"
-import { File, Folder, Trash2, Pencil, Copy, TableProperties } from "lucide-react"
+import { File, Folder, Trash2, Pencil, Copy, TableProperties, FolderPlus } from "lucide-react"
 type ViewMode = "grid" | "list" | "details"
 
 export interface FileItem {
@@ -106,6 +110,23 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
             Delete
           </ContextMenuItem>
         </ContextMenuGroup>
+        <ContextMenuSeparator />
+        <ContextMenuSub>
+          <ContextMenuSubTrigger inset>
+            <FolderPlus className="w-4 h-4 mr-2" />
+            Add Folder
+          </ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              Save Page As...
+              <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+            <ContextMenuItem>Name Window...</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>Developer Tools</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
         <ContextMenuSeparator />
         <ContextMenuItem>
           <TableProperties className="w-4 h-4 mr-2" /> 
