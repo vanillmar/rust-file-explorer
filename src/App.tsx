@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       <NavigationBar />
-      <Toolbar onChangeView={setViewMode}/>
+      <Toolbar onChangeView={setViewMode} />
       <ContentContainer items={mockItems} viewMode={viewMode} />
       <BottomBar />
     </div>
