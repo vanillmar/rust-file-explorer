@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { FolderPlus, RefreshCcw, Upload } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { FolderPlus, RefreshCcw, Upload } from "lucide-react"
 
 export function Toolbar() {
   return (
@@ -17,5 +17,5 @@ export function Toolbar() {
         Refresh
       </Button>
     </div>
-  );
+  )
 }

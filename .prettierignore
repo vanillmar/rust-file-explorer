@@ -1,0 +1,6 @@
+.vscode
+.dist
+node_modules
+src-tauri
+src/assets
+src/components/ui
