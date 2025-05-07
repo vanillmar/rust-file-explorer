@@ -1,24 +1,27 @@
+import { useState } from "react";
 import "./App.css";
 import { BottomBar } from "./components/custom/ButtomBar";
 import NavigationBar from "./components/custom/NavigationBar";
-import { Sidebar } from "./components/custom/Sidebar";
 import { Toolbar } from "./components/custom/Toolbar";
+import {FileItem} from "./components/custom/FileViewContainer";
+import ContentContainer from "./components/custom/ContentContainer";
+
+
+const mockItems: FileItem[] = [
+  { name: "Documents", type: "folder" },
+  { name: "Project.pdf", type: "file", size: "2 MB", modified: "2025-05-01" },
+  { name: "Photos", type: "folder" },
+  { name: "Resume.docx", type: "file", size: "250 KB", modified: "2025-04-20" },
+];
 
 function App() {
+  const [viewMode, _] = useState<"grid" | "list" | "details">("grid");
+
   return (
     <div className="flex flex-col h-screen">
       <NavigationBar />
       <Toolbar />
-      <div className="flex-1 p-1 overflow-auto">
-        <Sidebar />
-        {/* File explorer content goes here */}
-        <div className="grid grid-cols-4 gap-4">
-          {/* Example: file/folder tiles */}
-          <div className="border p-4 rounded bg-background shadow">Folder 1</div>
-          <div className="border p-4 rounded bg-background shadow">File 1.txt</div>
-          {/* Add more */}
-        </div>
-      </div>
+      <ContentContainer items={mockItems}  viewMode={viewMode} />
       <BottomBar />
   </div>
   );

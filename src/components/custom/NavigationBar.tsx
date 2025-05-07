@@ -8,7 +8,7 @@ export default function NavigationBar() {
         <div className="flex items-center gap-2 px-4 py-2 border-b bg-background">
             <NavigationButtoms />
             <AddressBar />
-            <ResizebleSearchBar initialWidth={100} minWidth={50} />
+            <ResizebleSearchBar />
         </div>
     )
 }
