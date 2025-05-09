@@ -6,25 +6,17 @@ import ContentContainer from "./ContentContainer"
 import { BottomBar } from "./ButtomBar"
 import { type FileItem } from "@/components/custom/FileViewContainer"
 
-
 interface FileExplorerProps {
   path: string
   onPathChange: (newPath: string) => void
 }
 
-const mockItems: FileItem[] = [
-  { name: "Documents", type: "folder" },
-  { name: "Project.pdf", type: "file", size: "2 MB", modified: "2025-05-01" },
-  { name: "Photos", type: "folder" },
-  { name: "Resume.docx", type: "file", size: "250 KB", modified: "2025-04-20" }
-]
-
-export default function FileExplorer({ path, onPathChange }: FileExplorerProps) {
-  const [files, setFiles] = useState<string[]>([])
+export default function FileExplorer({ path, onPathChange }: Readonly<FileExplorerProps>) {
+  const [files, setFiles] = useState<FileItem[]>([])
   const [viewMode, setViewMode] = useState<"grid" | "list" | "details">("grid")
 
   useEffect(() => {
-    invoke<string[]>("list_directory", { path }).then(setFiles).catch(console.error)
+    invoke<FileItem[]>("list_directory", { path }).then(setFiles).catch(console.error)
   }, [path])
 
   const goUp = () => {
@@ -39,9 +31,9 @@ export default function FileExplorer({ path, onPathChange }: FileExplorerProps) 
 
   return (
     <div className="flex flex-col h-screen">
-          <NavigationBar />
+          <NavigationBar goUp={goUp} />
           <Toolbar onChangeView={setViewMode} />
-          <ContentContainer items={mockItems} viewMode={viewMode} />
+          <ContentContainer items={files} viewMode={viewMode} onPathChange={onPathChange} handleNavigate={handleNavigate} />
           <BottomBar />
     </div>
   )

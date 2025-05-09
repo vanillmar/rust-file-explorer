@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/ui/tabs"
 import { Button } from "./components/ui/button" 
 import FileExplorer from "./components/custom/FileExplorer"
-import { Plus } from "lucide-react"
 
 
 function App() {
@@ -40,25 +39,30 @@ function App() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       <Tabs value={currentTabId} onValueChange={handleChangeTab} className="w-full">
         <TabsList className="flex space-x-2 overflow-x-auto">
           {tabs.map(tab => (
             <TabsTrigger key={tab.id} value={tab.id} className="flex items-center space-x-1">
               <span>{tab.title}</span>
-              <Button size="icon" variant="ghost" onClick={(e) => {
-                e.stopPropagation();
-                handleCloseTab(tab.id);
-              }}>×</Button>
+              <Button 
+                className="rounded-full h-6 w-6" 
+                size="icon" 
+                variant="ghost" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCloseTab(tab.id);
+                }}
+              >
+                ×
+              </Button>
             </TabsTrigger>
           ))}
-          <Button size="icon" variant="outline" onClick={handleAddTab}>
-            <Plus />
-          </Button>
+          <Button className=" h-7 w-7" size="icon" variant="outline" onClick={handleAddTab}>+</Button>
         </TabsList>
 
         {tabs.map(tab => (
-          <TabsContent key={tab.id} value={tab.id} className="mt-4">
+          <TabsContent key={tab.id} value={tab.id}>
             <FileExplorer path={tab.path} onPathChange={(newPath) => handlePathChange(tab.id, newPath)} />
           </TabsContent>
         ))}

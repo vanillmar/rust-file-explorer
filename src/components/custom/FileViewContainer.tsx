@@ -10,7 +10,9 @@ import {
   ContextMenuSub,
   ContextMenuSeparator
 } from "@/components/ui/context-menu"
+import { formatDate, formatSizeAuto } from "@/lib/Common"
 import { File, Folder, Trash2, Pencil, Copy, TableProperties, FolderPlus } from "lucide-react"
+import { Button } from "../ui/button"
 type ViewMode = "grid" | "list" | "details"
 
 export interface FileItem {
@@ -23,9 +25,11 @@ export interface FileItem {
 export interface FileViewContainerProps {
   items: FileItem[]
   viewMode: ViewMode
+  onPathChange?: (newPath: string) => void
+  handleNavigate?: (name: string) => void
 }
 
-export default function FileViewContainer({ items, viewMode }: FileViewContainerProps) {
+export default function FileViewContainer({ items, viewMode, onPathChange, handleNavigate }: Readonly<FileViewContainerProps>) {
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
@@ -33,17 +37,18 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
           {viewMode === "grid" && (
             <div className="grid grid-cols-4 gap-4">
               {items.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col items-center p-4 border rounded shadow-sm hover:bg-muted"
-                >
-                  {item.type === "folder" ? (
-                    <Folder className="h-20 w-8 mb-2" strokeWidth={1.5} />
-                  ) : (
-                    <File className="h-20 w-8 mb-2" strokeWidth={1.5} />
-                  )}
-                  <span className="text-sm truncate w-full text-center">{item.name}</span>
-                </div>
+                  <div
+                    key={idx}
+                    className="flex flex-col items-center p-4 border rounded shadow-sm hover:bg-muted"
+                    onClick={() => handleNavigate?.(item.name)}
+                    >
+                    {item.type === "folder" ? (
+                      <Folder className="h-50 w-6 mb-2" strokeWidth={1.5} />
+                    ) : (
+                      <File className="h-50 w-6 mb-2" strokeWidth={1.5} />
+                    )}
+                    <span className="text-sm truncate w-full text-center">{item.name}</span>
+                  </div>
               ))}
             </div>
           )}
@@ -54,6 +59,7 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
                 <li
                   key={idx}
                   className="flex items-center gap-2 py-2 px-2 hover:bg-muted rounded"
+                  onClick={() => handleNavigate?.(item.name)}
                 >
                   {item.type === "folder" ? (
                     <Folder className="h-4 w-4" />
@@ -77,7 +83,11 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
               </thead>
               <tbody>
                 {items.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-muted">
+                  <tr 
+                    key={idx} 
+                    className="hover:bg-muted"
+                    onClick={() => handleNavigate?.(item.name)}
+                  >
                     <td className="p-2 flex items-center gap-2">
                       {item.type === "folder" ? (
                         <Folder className="h-4 w-4" />
@@ -86,8 +96,8 @@ export default function FileViewContainer({ items, viewMode }: FileViewContainer
                       )}
                       {item.name}
                     </td>
-                    <td className="p-2">{item.size || "-"}</td>
-                    <td className="p-2">{item.modified || "-"}</td>
+                    <td className="p-2">{(item.size && `${formatSizeAuto(item.size)}`) ?? "-"}</td>
+                    <td className="p-2">{(item.modified && `${formatDate(item.modified)}`) ?? "-"}</td>
                   </tr>
                 ))}
               </tbody>

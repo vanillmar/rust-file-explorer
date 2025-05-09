@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, ArrowUp, RefreshCcw } from "lucide-react"
 
-{
-  /* Left: Navigation buttons */
+export interface NavigationButtomsProps {
+  goUp: () => void
 }
-export default function NavigationButtoms() {
+
+export default function NavigationButtoms({ goUp }: Readonly<NavigationButtomsProps>) {
   return (
     <div className="flex gap-2">
       <Button variant="ghost" size="icon">
@@ -13,7 +14,11 @@ export default function NavigationButtoms() {
       <Button variant="ghost" size="icon">
         <ArrowRight className="w-4 h-4" />
       </Button>
-      <Button variant="ghost" size="icon">
+      <Button 
+        variant="ghost" 
+        size="icon"
+        onClick={goUp}
+      >
         <ArrowUp className="w-4 h-4" />
       </Button>
       <Button variant="ghost" size="icon">
