@@ -31,10 +31,15 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
 
   return (
     <div className="flex flex-col h-screen">
-          <NavigationBar goUp={goUp} />
-          <Toolbar onChangeView={setViewMode} />
-          <ContentContainer items={files} viewMode={viewMode} onPathChange={onPathChange} handleNavigate={handleNavigate} />
-          <BottomBar />
+      <NavigationBar goUp={goUp} />
+      <Toolbar onChangeView={setViewMode} />
+      <ContentContainer
+        items={files}
+        viewMode={viewMode}
+        onPathChange={onPathChange}
+        handleNavigate={handleNavigate}
+      />
+      <BottomBar />
     </div>
   )
 }

@@ -14,11 +14,7 @@ export default function NavigationButtoms({ goUp }: Readonly<NavigationButtomsPr
       <Button variant="ghost" size="icon">
         <ArrowRight className="w-4 h-4" />
       </Button>
-      <Button 
-        variant="ghost" 
-        size="icon"
-        onClick={goUp}
-      >
+      <Button variant="ghost" size="icon" onClick={goUp}>
         <ArrowUp className="w-4 h-4" />
       </Button>
       <Button variant="ghost" size="icon">

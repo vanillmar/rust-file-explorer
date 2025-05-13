@@ -29,7 +29,12 @@ export interface FileViewContainerProps {
   handleNavigate?: (name: string) => void
 }
 
-export default function FileViewContainer({ items, viewMode, onPathChange, handleNavigate }: Readonly<FileViewContainerProps>) {
+export default function FileViewContainer({
+  items,
+  viewMode,
+  onPathChange,
+  handleNavigate
+}: Readonly<FileViewContainerProps>) {
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
@@ -37,18 +42,18 @@ export default function FileViewContainer({ items, viewMode, onPathChange, handl
           {viewMode === "grid" && (
             <div className="grid grid-cols-4 gap-4">
               {items.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col items-center p-4 border rounded shadow-sm hover:bg-muted"
-                    onClick={() => handleNavigate?.(item.name)}
-                    >
-                    {item.type === "folder" ? (
-                      <Folder className="h-50 w-6 mb-2" strokeWidth={1.5} />
-                    ) : (
-                      <File className="h-50 w-6 mb-2" strokeWidth={1.5} />
-                    )}
-                    <span className="text-sm truncate w-full text-center">{item.name}</span>
-                  </div>
+                <div
+                  key={idx}
+                  className="flex flex-col items-center p-4 border rounded shadow-sm hover:bg-muted"
+                  onClick={() => handleNavigate?.(item.name)}
+                >
+                  {item.type === "folder" ? (
+                    <Folder className="h-50 w-6 mb-2" strokeWidth={1.5} />
+                  ) : (
+                    <File className="h-50 w-6 mb-2" strokeWidth={1.5} />
+                  )}
+                  <span className="text-sm truncate w-full text-center">{item.name}</span>
+                </div>
               ))}
             </div>
           )}
@@ -83,8 +88,8 @@ export default function FileViewContainer({ items, viewMode, onPathChange, handl
               </thead>
               <tbody>
                 {items.map((item, idx) => (
-                  <tr 
-                    key={idx} 
+                  <tr
+                    key={idx}
                     className="hover:bg-muted"
                     onClick={() => handleNavigate?.(item.name)}
                   >
@@ -97,7 +102,9 @@ export default function FileViewContainer({ items, viewMode, onPathChange, handl
                       {item.name}
                     </td>
                     <td className="p-2">{(item.size && `${formatSizeAuto(item.size)}`) ?? "-"}</td>
-                    <td className="p-2">{(item.modified && `${formatDate(item.modified)}`) ?? "-"}</td>
+                    <td className="p-2">
+                      {(item.modified && `${formatDate(item.modified)}`) ?? "-"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -141,7 +148,7 @@ export default function FileViewContainer({ items, viewMode, onPathChange, handl
         </ContextMenuSub>
         <ContextMenuSeparator />
         <ContextMenuItem>
-          <TableProperties className="w-4 h-4 mr-2" /> 
+          <TableProperties className="w-4 h-4 mr-2" />
           Properties
         </ContextMenuItem>
       </ContextMenuContent>

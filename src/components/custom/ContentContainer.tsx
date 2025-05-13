@@ -2,7 +2,12 @@ import { useState } from "react"
 import FileViewContainer, { type FileViewContainerProps } from "./FileViewContainer"
 import { Sidebar } from "./Sidebar"
 
-export default function ContentContainer({ items, viewMode, onPathChange, handleNavigate }: Readonly<FileViewContainerProps>) {
+export default function ContentContainer({
+  items,
+  viewMode,
+  onPathChange,
+  handleNavigate
+}: Readonly<FileViewContainerProps>) {
   const [sidebarWidth, _] = useState(240)
 
   return (
@@ -16,7 +21,12 @@ export default function ContentContainer({ items, viewMode, onPathChange, handle
       {/* Main Content */}
       <div className="flex-1 p-4 overflow-auto">
         {/* File View Container */}
-        <FileViewContainer items={items} viewMode={viewMode} onPathChange={onPathChange} handleNavigate={handleNavigate}/>
+        <FileViewContainer
+          items={items}
+          viewMode={viewMode}
+          onPathChange={onPathChange}
+          handleNavigate={handleNavigate}
+        />
       </div>
     </div>
   )
