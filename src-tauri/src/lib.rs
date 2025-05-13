@@ -1,8 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use serde::Serialize;
-use std::fs::{self, Metadata};
-use std::path::Path;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::fs::{self};
+use std::time::UNIX_EPOCH;
 
 #[derive(Serialize)]
 struct FileItem {
