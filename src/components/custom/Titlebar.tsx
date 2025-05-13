@@ -1,4 +1,5 @@
 import { WindowTitlebar } from "tauri-controls"
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -24,6 +25,7 @@ export interface TitlebarProps {
 }
 
 export default function Titlebar({ title }:Readonly<TitlebarProps>) {
+    const appWindow = getCurrentWindow();
     return (
         <WindowTitlebar
             title={title}
@@ -55,7 +57,11 @@ export default function Titlebar({ title }:Readonly<TitlebarProps>) {
                             Hide Others... <MenubarShortcut>⇧⌘H</MenubarShortcut>
                         </MenubarItem>
                         <MenubarShortcut />
-                        <MenubarItem>
+                        <MenubarItem onClick={() =>{
+                            appWindow.close()
+                            console.log("close")
+                        } 
+                        }>
                             Quit Music <MenubarShortcut>⌘Q</MenubarShortcut>
                         </MenubarItem>
                         </MenubarContent>
