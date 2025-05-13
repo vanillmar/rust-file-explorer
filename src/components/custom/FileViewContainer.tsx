@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/context-menu"
 import { formatDate, formatSizeAuto } from "@/lib/Common"
 import { File, Folder, Trash2, Pencil, Copy, TableProperties, FolderPlus } from "lucide-react"
-import { Button } from "../ui/button"
 type ViewMode = "grid" | "list" | "details"
 
 export interface FileItem {
@@ -32,7 +31,6 @@ export interface FileViewContainerProps {
 export default function FileViewContainer({
   items,
   viewMode,
-  onPathChange,
   handleNavigate
 }: Readonly<FileViewContainerProps>) {
   return (

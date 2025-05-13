@@ -58,7 +58,6 @@ export default function Titlebar({ title }: Readonly<TitlebarProps>) {
               <MenubarItem
                 onClick={() => {
                   appWindow.close()
-                  console.log("close")
                 }}
               >
                 Quit Music <MenubarShortcut>⌘Q</MenubarShortcut>
