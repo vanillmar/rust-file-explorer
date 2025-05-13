@@ -5,6 +5,7 @@ import { Toolbar } from "./Toolbar"
 import ContentContainer from "./ContentContainer"
 import { BottomBar } from "./ButtomBar"
 import { type FileItem } from "@/components/custom/FileViewContainer"
+import { toast } from "sonner"
 
 interface FileExplorerProps {
   path: string
@@ -16,7 +17,26 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
   const [viewMode, setViewMode] = useState<"grid" | "list" | "details">("grid")
 
   useEffect(() => {
-    invoke<FileItem[]>("list_directory", { path }).then(setFiles).catch(console.error)
+    invoke<FileItem[]>("list_directory", { path })
+    .then(setFiles)
+    .catch(error => { 
+      toast("An error occurred while listing the directory", {
+        description: error.message,
+        action: {
+          label: "Retry",
+          onClick: () => {
+            invoke<FileItem[]>("list_directory", { path })
+            .then(setFiles)
+            .catch(error => {
+              toast.error("Failed to list directory", {
+                description: error.message
+              })
+            })
+          }
+        }
+      })
+      setFiles([])	
+    })
   }, [path])
 
   const goUp = () => {
@@ -30,7 +50,7 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className=" flex flex-col">
       <NavigationBar goUp={goUp} />
       <Toolbar onChangeView={setViewMode} />
       <ContentContainer

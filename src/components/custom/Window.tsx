@@ -36,7 +36,7 @@ export default function Window() {
   }
 
   return (
-    <div className="p-1">
+    <div >
       <Titlebar title="My App" />
       <Tabs value={currentTabId} onValueChange={handleChangeTab} className="w-full">
         <TabsList className="flex space-x-2 overflow-x-auto">
@@ -56,7 +56,7 @@ export default function Window() {
               </Button>
             </TabsTrigger>
           ))}
-          <Button className=" h-7 w-7" size="icon" variant="outline" onClick={handleAddTab}>
+          <Button className="h-7 w-7" size="icon" variant="outline" onClick={handleAddTab}>
             +
           </Button>
         </TabsList>
