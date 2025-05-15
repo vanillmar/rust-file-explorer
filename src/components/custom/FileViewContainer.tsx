@@ -36,7 +36,7 @@ export default function FileViewContainer({
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
-        <div className="w-full h-full overflow-auto">
+        <div className="w-full h-200 min-h-100 max-h-full overflow-auto">
           {viewMode === "grid" && (
             <div className="grid grid-cols-4 gap-4">
               {items.map((item, idx) => (

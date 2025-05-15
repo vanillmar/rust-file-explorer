@@ -11,7 +11,7 @@ function App() {
       <div
         className={cn(
           "overflow-y-hidden border-t bg-background ",
-           "scrollbar-none"
+           //"scrollbar-none"
           //"scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md"
         )}
       >

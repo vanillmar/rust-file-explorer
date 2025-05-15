@@ -7,13 +7,10 @@ interface ResizableSearchBarProps {
   minWidth?: number
 }
 
-{
-  /* Right: Search */
-}
 export default function ResizebleSearchBar({
   initialWidth = 200,
   minWidth = 150
-}: ResizableSearchBarProps) {
+}: Readonly<ResizableSearchBarProps>) {
   const [searchWidth, setSearchWidth] = useState(initialWidth)
   const isResizing = useRef(false)
 

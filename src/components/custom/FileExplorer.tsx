@@ -50,7 +50,7 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
   }
 
   return (
-    <div className=" flex flex-col">
+    <div className="flex flex-col">
       <NavigationBar goUp={goUp} />
       <Toolbar onChangeView={setViewMode} />
       <ContentContainer

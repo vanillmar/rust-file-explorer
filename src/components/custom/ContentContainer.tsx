@@ -19,7 +19,7 @@ export default function ContentContainer({
       {/* Optional: Resizer bar between sidebar and content */}
 
       {/* Main Content */}
-      <div className="flex-1 p-4 overflow-auto">
+      <div className="flex-1 p-4">
         {/* File View Container */}
         <FileViewContainer
           items={items}
