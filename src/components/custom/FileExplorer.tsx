@@ -18,25 +18,25 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
 
   useEffect(() => {
     invoke<FileItem[]>("list_directory", { path })
-    .then(setFiles)
-    .catch(error => { 
-      toast("An error occurred while listing the directory", {
-        description: error.message,
-        action: {
-          label: "Retry",
-          onClick: () => {
-            invoke<FileItem[]>("list_directory", { path })
-            .then(setFiles)
-            .catch(error => {
-              toast.error("Failed to list directory", {
-                description: error.message
-              })
-            })
+      .then(setFiles)
+      .catch(error => {
+        toast("An error occurred while listing the directory", {
+          description: error.message,
+          action: {
+            label: "Retry",
+            onClick: () => {
+              invoke<FileItem[]>("list_directory", { path })
+                .then(setFiles)
+                .catch(error => {
+                  toast.error("Failed to list directory", {
+                    description: error.message
+                  })
+                })
+            }
           }
-        }
+        })
+        setFiles([])
       })
-      setFiles([])	
-    })
   }, [path])
 
   const goUp = () => {

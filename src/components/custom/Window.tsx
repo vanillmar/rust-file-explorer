@@ -36,7 +36,7 @@ export default function Window() {
   }
 
   return (
-    <div >
+    <div>
       <Titlebar title="My App" />
       <Tabs value={currentTabId} onValueChange={handleChangeTab} className="w-full">
         <TabsList className="flex space-x-2 overflow-x-auto">
