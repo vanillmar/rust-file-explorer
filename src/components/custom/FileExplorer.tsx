@@ -59,7 +59,7 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
         onPathChange={onPathChange}
         handleNavigate={handleNavigate}
       />
-      <BottomBar path={path} onPathChange={onPathChange} />
+      <BottomBar itemCount={files.length} />
     </div>
   )
 }
