@@ -1,5 +1,5 @@
 type ButtomBarProps = {
-  itemCount : number
+  itemCount: number
 }
 
 export function BottomBar({ itemCount }: Readonly<ButtomBarProps>) {
