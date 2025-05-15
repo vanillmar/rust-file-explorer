@@ -16,3 +16,16 @@ export const formatSizeAuto = (sizeStr?: string): string => {
   const gb = mb / 1024
   return `${gb.toFixed(2)} GB`
 }
+
+// utils/fs.ts or inside your component
+export function getSiblings(path: string): string[] {
+  // You'd normally call the filesystem here. This is hardcoded for example.
+  const mockFs = {
+    "/": ["home", "etc", "var"],
+    "/home": ["user", "guest", "admin"],
+    "/home/user": ["documents", "downloads", "pictures"],
+    "/home/user/documents": ["work", "personal"]
+  }
+
+  return mockFs[path] ?? []
+}

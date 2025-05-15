@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
 interface ResizableSearchBarProps {
@@ -50,7 +49,6 @@ export default function ResizebleSearchBar({
         style={{ width: `${searchWidth}px` }}
         className="flex items-center relative transition-all"
       >
-        <Search className="absolute left-2 h-4 w-4 text-muted-foreground" />
         <Input type="text" placeholder="Search files..." className="pl-8 pr-2" />
       </div>
     </>

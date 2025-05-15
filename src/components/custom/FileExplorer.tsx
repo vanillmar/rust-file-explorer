@@ -51,7 +51,7 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
 
   return (
     <div className="flex flex-col">
-      <NavigationBar goUp={goUp} />
+      <NavigationBar path={path} onPathChange={onPathChange} goUp={goUp} />
       <Toolbar onChangeView={setViewMode} />
       <ContentContainer
         items={files}
@@ -59,7 +59,7 @@ export default function FileExplorer({ path, onPathChange }: Readonly<FileExplor
         onPathChange={onPathChange}
         handleNavigate={handleNavigate}
       />
-      <BottomBar />
+      <BottomBar path={path} onPathChange={onPathChange} />
     </div>
   )
 }
