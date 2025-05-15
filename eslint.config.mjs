@@ -20,7 +20,7 @@ export default defineConfig([
     "**/node_modules",
     "**/dist",
     "**/*eslint.config.js",
-    "./components/ui",
+    "./src/components/ui",
     "**/.vscode",
     "**/src-tauri/",
     "**/tailwind.config.js"
