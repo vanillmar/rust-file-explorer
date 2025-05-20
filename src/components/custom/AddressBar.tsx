@@ -1,68 +1,79 @@
-import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronRight } from "lucide-react"
-import { getSiblings } from "@/lib/Common"
-import {
-  DropdownMenuItem,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
+import { useEffect, useRef, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 type AddressBarProps = {
   path: string
-  onPathChange?: (newPath: string) => void
+  onPathChange: (newPath: string) => void
 }
 
 export default function AddressBar({ path, onPathChange }: Readonly<AddressBarProps>) {
-  const segments = path === "/" ? ["/"] : ["/", ...path.split("/").filter(Boolean)]
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputValue, setInputValue] = useState<string>(path);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const buildFullPath = (index: number) =>
-    index === 0 ? "/" : "/" + segments.slice(1, index + 1).join("/")
+  const segments = path.split("/").filter(Boolean);
 
-  const handleNavigate = (newPath: string) => {
-    onPathChange?.(newPath)
-  }
+  useEffect(() => {
+    setInputValue(path);
+  }, [path]);
+
+  useEffect(() => {
+    if (isEditing) inputRef.current?.focus();
+  }, [isEditing]);
+
+  const handleInputSubmit = () => {
+    onPathChange(inputValue);
+    setIsEditing(false);
+  };
+
+  const handleSegmentClick = (index: number) => {
+    const newPath = "/" + segments.slice(0, index + 1).join("/");
+    onPathChange(newPath);
+  };
 
   return (
-    <div className="flex items-center space-x-1 p-x-2 w-full bg-muted rounded-xl shadow">
-      {segments.map((segment, index) => {
-        const currentPath = buildFullPath(index)
-        const siblings = getSiblings(
-          currentPath === "/" ? "/" : currentPath.split("/").slice(0, -1).join("/") || "/"
-        )
-        return (
-          <div key={index} className="flex items-center space-x-1">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="text-sm px-2 py-1 rounded-xl flex items-center gap-1"
-                >
-                  {segment === "/" ? "Root" : segment}
-                  <ChevronDown className="w-3 h-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {siblings.map(sibling => {
-                  const base =
-                    currentPath === "/" ? "" : currentPath.split("/").slice(0, -1).join("/")
-                  const siblingPath = base
-                    ? `/${base}/${sibling}`.replace(/\/+/g, "/")
-                    : `/${sibling}`
-                  return (
-                    <DropdownMenuItem key={sibling} onClick={() => handleNavigate(siblingPath)}>
-                      {sibling}
-                    </DropdownMenuItem>
-                  )
-                })}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            {index < segments.length - 1 && (
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            )}
-          </div>
-        )
-      })}
+    <div
+      className={cn(
+        "border rounded-xl bg-muted cursor-text w-full",
+        isEditing && "bg-background"
+      )}
+      onClick={() => setIsEditing(true)}
+    >
+      {isEditing ? (
+        <Input
+          className="text-sm"
+          ref={inputRef}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onBlur={handleInputSubmit}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleInputSubmit();
+            } else if (e.key === "Escape") {
+              setIsEditing(false);
+              setInputValue(path);
+            }
+          }}
+        />
+      ) : (
+        <div className="flex flex-wrap gap-1 text-sm px-4 py-2  ">
+          {segments.map((segment, index) => (
+            <div key={index} className="flex items-center gap-1">
+              <span
+                className="text-blue-600 cursor-pointer hover:underline"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering edit mode
+                  handleSegmentClick(index);
+                }}
+              >
+                {segment}
+              </span>
+              {index < segments.length - 1 && <span className="text-muted-foreground">›</span>}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
-  )
+  );
 }
