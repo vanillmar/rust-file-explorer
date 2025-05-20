@@ -59,25 +59,15 @@ jobs:
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+          
+      - name: Copy build outputs to artifacts directory
+        run: |
+          mkdir -p artifacts
+          cp -r src-tauri/target/release/bundle/* artifacts/ || true
+          ls -R artifacts
 
-  publish-release:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    needs: [publish-tauri]
-
-    steps:
-      - name: publish release
-        id: publish-release
-        uses: actions/github-script@v6
-        env:
-          release_id: ${{ needs.create-release.outputs.release_id }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            github.rest.repos.updateRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: process.env.release_id,
-              draft: false,
-              prerelease: false
-            })
+          name: tauri-artifacts-${{ runner.os }}
+          path: artifacts
