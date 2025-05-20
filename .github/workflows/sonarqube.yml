@@ -33,12 +33,13 @@ jobs:
             env:
               SONAR_TOKEN: ${{ secrets.SONAR_TOKEN || '' }}
               SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL || '' }}
+              SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY || '' }}
             run: |
               if [ -z "$SONAR_TOKEN" ] || [ -z "$SONAR_HOST_URL" ]; then
                 echo "SONAR_TOKEN or SONAR_HOST_URL is not set. Skipping SonarQube scan."
                 exit 1
               fi
               ./gradlew sonarqube \
-                -Dsonar.projectKey=<your_project_key> \
+                -Dsonar.projectKey=$SONAR_PROJECT_KEY \
                 -Dsonar.host.url=$SONAR_HOST_URL \
                 -Dsonar.login=$SONAR_TOKEN
