@@ -20,12 +20,18 @@ export const formatSizeAuto = (sizeStr?: string): string => {
 // utils/fs.ts or inside your component
 export function getSiblings(path: string): string[] {
   // You'd normally call the filesystem here. This is hardcoded for example.
-  const mockFs = {
+  const mockFs: Record<string, string[]> = {
     "/": ["home", "etc", "var"],
     "/home": ["user", "guest", "admin"],
     "/home/user": ["documents", "downloads", "pictures"],
     "/home/user/documents": ["work", "personal"]
   }
 
-  return mockFs[path] ?? []
+  //
+  // return mockFs[path] ?? []
+
+  if(path in mockFs) {
+    return mockFs[path as keyof typeof mockFs];
+  }
+  return []
 }
