@@ -60,22 +60,11 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
-      - name: Move .app bundle to custom directory (macOS only)
-        if: runner.os == 'macOS'
-        run: |
-          APP_NAME="file-explorer"
-          SRC="src-tauri/target/aarch64-apple-darwin/release/bundle/macos/${APP_NAME}.app"
-          DEST_DIR="src-tauri/target/release/aarch64-apple-darwin/bundle/macos"
-
-          mkdir -p "$DEST_DIR"
-          cp -R "$SRC" "$DEST_DIR/"
-          echo "Copied .app to $DEST_DIR"
-
       - name: Copy build outputs to artifacts directory
         run: |
-          VERSION=${{ github.ref_name }}
-          mkdir -p artifacts/$VERSION
-          cp -R src-tauri/target/release/**/bundle/* artifacts/$VERSION || true
+          mkdir -p artifacts
+          cp -r src-tauri/target/**/release/bundle/* artifacts/ || true
+          ls -R artifacts
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
